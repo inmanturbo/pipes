@@ -1,0 +1,21 @@
+{
+    "name": "inman/pipeware",
+    "description": "Pipes for php with a simple api based on functional composition",
+    "type": "library",
+    "require-dev": {
+        "pestphp/pest": "3.x-dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "inmanturbo"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
