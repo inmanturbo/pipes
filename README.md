@@ -22,6 +22,8 @@ Or just copy or download the [`functions.php`](https://github.com/inmanturbo/pip
 
 ```php
 
+require 'vendor/autoload.php';
+
 use function Inmanturbo\Pipes\pipe;
 
 $add = fn ($number = 0) => $number + 1;
