@@ -20,7 +20,7 @@ function pipe(mixed $input = null, ...$args)
         public function halt(mixed $result = null)
         {
             $this->halted = true;
-            
+
             return new Halt($result);
         }
 
