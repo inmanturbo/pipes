@@ -12,7 +12,7 @@ Simply put, it takes the output of the last one and pipes it to the next one. So
 You can install the package via composer:
 
 ```bash
-composer require inmanturbo/ecow
+composer require inmanturbo/pipes
 ```
 
 Or just copy or download the [`functions.php`](https://github.com/inmanturbo/pipes/blob/main/functions.php) file from this repository.
