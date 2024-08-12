@@ -19,19 +19,18 @@ Or just copy or download the [`functions.php`](https://github.com/inmanturbo/pip
 
 # Usage
 
-
 ```php
 
 require 'vendor/autoload.php';
 
 use function Inmanturbo\Pipes\pipe;
 
-$add = fn ($number = 0) => $number + 1;
+$addOne = fn ($number = 0) => $number + 1;
 
-$five = pipe($add) // 1
+$five = pipe($addOne) // 1
     ->pipe(fn ($number) => $number + 1) // 2
-    ->pipe($add) // 3
-    ->pipe($add) // 4
+    ->pipe($addOne) // 3
+    ->pipe($addOne) // 4
     ->thenReturn(); // 4
 ```
 
@@ -63,10 +62,12 @@ class Subtract
     }
 }
 
-$six = pipe($add, 1)
-    ->pipe($add)
-    ->pipe($add)
-    ->pipe($add)
+$addOne = fn ($number = 0) => $number + 1;
+
+$six = pipe($addOne, 1)
+    ->pipe($addOne)
+    ->pipe($addOne)
+    ->pipe($addOne)
     ->then(fn ($number) => ++$number);
 
 $five = pipe($six)
@@ -86,23 +87,23 @@ results can be returned three ways:
 `then()` or `thenReturn()` both a take final callback and return the result, or `result()`, which simply returns the result.
 
 ```php
-$six = pipe($add, 1)
-    ->pipe($add)
-    ->pipe($add)
-    ->pipe($add)
+$addOne = fn ($number = 0) => $number + 1;
+
+$six = pipe($addOne, 1)
+    ->pipe($addOne)
+    ->pipe($addOne)
+    ->pipe($addOne)
     ->then(fn ($number) => ++$number);
 
-$sixAgain = pipe($add, 1)
-    ->pipe($add)
-    ->pipe($add)
-    ->pipe($add)
+$sixAgain = pipe($addOne, 1)
+    ->pipe($addOne)
+    ->pipe($addOne)
+    ->pipe($addOne)
     ->thenReturn(fn ($number) => ++$number);
 
-$five = pipe($add, 1)
-    ->pipe($add)
-    ->pipe($add)
-    ->pipe($add)
+$five = pipe($addOne, 1)
+    ->pipe($addOne)
+    ->pipe($addOne)
+    ->pipe($addOne)
     ->result();
 ```
-
-
