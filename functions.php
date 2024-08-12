@@ -2,7 +2,6 @@
 
 namespace Inmanturbo\Pipes;
 
-use Closure;
 use InvalidArgumentException;
 
 class Halt
