@@ -2,6 +2,7 @@
 
 namespace Inmanturbo\Pipes;
 
+use Closure;
 use InvalidArgumentException;
 
 class Halt
@@ -9,18 +10,11 @@ class Halt
     public function __construct(public $result = null) {}
 }
 
-function middleware(callable|array $middlewares): mixed
-{
-    return pipe()->middleware($middlewares);
-}
-
 function pipe(mixed $input = null, ...$args)
 {
     return new class($input, ...$args)
     {
         private $result;
-
-        private $middlewareStack = [];
 
         private bool $halted = false;
 
@@ -36,44 +30,9 @@ function pipe(mixed $input = null, ...$args)
                 : $input;
         }
 
-        public function middleware(callable|array $middlewares): self
-        {
-            return $this;
-
-            if (! is_array($middlewares)) {
-                $middlewares = [$middlewares];
-            }
-
-            foreach ($middlewares as $middleware) {
-                $this->middlewareStack[] = $middleware;
-            }
-
-            return $this;
-        }
-
         public function pipe(mixed $callback): self
         {
             $callback = $this->resolveInput($callback);
-
-            foreach ($this->middlewareStack as $middleware) {
-                if ($this->halted) {
-                    continue;
-                }
-                $middlewareCallback = function ($result) use ($middleware, $callback) {
-
-                    $middlewareResult = $middleware($result, $callback);
-
-                    if ($middlewareResult instanceof Halt) {
-                        $this->halted = true;
-
-                        return $middlewareResult->result;
-                    }
-
-                    return $middlewareResult;
-                };
-
-                $this->result = $middlewareCallback($this->result);
-            }
 
             if (! $this->halted) {
                 $this->result = $callback($this->result);
@@ -116,5 +75,15 @@ function pipe(mixed $input = null, ...$args)
 
             return $input;
         }
+    };
+}
+
+function hop(callable $callback, ?callable $middleware = null) {
+    return function($passable, $next) use($callback, $middleware) {
+        if($middleware) {
+            return $middleware($callback($passable), $next);
+        }
+
+        return $next($callback($passable));
     };
 }
