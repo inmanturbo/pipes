@@ -4,7 +4,10 @@
     "type": "library",
     "require-dev": {
         "pestphp/pest": "3.x-dev",
-        "laravel/pint": "dev-main"
+        "laravel/pint": "dev-main",
+        "phpstan/extension-installer": "1.4.x-dev",
+        "phpstan/phpstan-deprecation-rules": "1.2.x-dev",
+        "phpstan/phpstan-phpunit": "1.4.x-dev"
     },
     "license": "MIT",
     "authors": [
@@ -15,7 +18,8 @@
     "minimum-stability": "dev",
     "config": {
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
         }
     },
     "autoload": {
