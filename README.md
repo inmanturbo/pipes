@@ -21,7 +21,7 @@ Or just copy or download the [`functions.php`](https://github.com/inmanturbo/pip
 
 ```php
 
-require 'vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 use function Inmanturbo\Pipes\pipe;
 
