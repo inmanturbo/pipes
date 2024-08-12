@@ -78,7 +78,13 @@ function pipe(mixed $input = null, ...$args)
     };
 }
 
-function hop(callable $callback, ?callable $middleware = null) {
+function hop(mixed $callback, mixed $middleware = null) {
+    $callback = resolveCallback($callback);
+
+    if ($middleware) {
+        $middleware = resolveCallback($middleware);
+    }
+
     return function($passable, $next) use($callback, $middleware) {
         if($middleware) {
             return $middleware($callback($passable), $next);
@@ -86,4 +92,19 @@ function hop(callable $callback, ?callable $middleware = null) {
 
         return $next($callback($passable));
     };
+}
+
+function resolveCallback(mixed $callback)
+{
+    if (is_string($callback) && class_exists($callback)) {
+        $instance = function_exists('app') ? app($callback) : new $callback;
+
+        if (! is_callable($instance)) {
+            throw new InvalidArgumentException("Class {$callback} is not invokable.");
+        }
+
+        return $instance;
+    }
+
+    return $callback;
 }

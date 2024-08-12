@@ -18,9 +18,11 @@ class InvokeAdd {
 }
 
 test('it can hop', function () {
-    $three = (new Pipeline)->send(0)
+    $five = (new Pipeline)->send(0)
+        ->pipe(hop(fn($number) => $number +1))
         ->pipe(hop(fn($number) => $number +1))
         ->pipe(hop(new InvokeAdd))
+        ->pipe(hop(InvokeAdd::class))
         ->pipe(hop(fn($number) => (new Add)->add($number)))
     ->thenReturn();
 
@@ -32,7 +34,7 @@ test('it can hop', function () {
         ])
     ->thenReturn();
 
-    expect($three)->toBe(3);
+    expect($five)->toBe(5);
 
     expect($four)->toBe(4);
 });
