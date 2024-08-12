@@ -3,7 +3,7 @@
 use function Inmanturbo\Pipes\middleware;
 use function Inmanturbo\Pipes\pipe;
 
-class Subtractinate
+class Subtract
 {
     public function __invoke($number)
     {
@@ -32,13 +32,13 @@ it('can pipe', function () {
     expect($six)->toBe(6);
 
     $fiveAgain = pipe($six)
-        ->pipe(Subtractinate::class)
+        ->pipe(Subtract::class)
         ->thenReturn();
 
     expect($fiveAgain)->toBe(5);
 
-    $three = pipe(new Subtractinate, $fiveAgain)
-        ->pipe(new Subtractinate)
+    $three = pipe(new Subtract, $fiveAgain)
+        ->pipe(new Subtract)
         ->thenReturn();
 
     expect($three)->toBe(3);
