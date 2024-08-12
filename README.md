@@ -82,7 +82,7 @@ $three = pipe(new Subtract, $five)
 
 ```
 
-Returning results
+## Returning results
 
 results can be returned three ways:
 
