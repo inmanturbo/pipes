@@ -9,11 +9,13 @@ class Halt
     public function __construct(public $result = null) {}
 }
 
-function middleware(callable|array $middlewares): mixed {
+function middleware(callable|array $middlewares): mixed
+{
     return pipe()->middleware($middlewares);
 }
 
-function pipe(mixed $input = null, ...$args) {
+function pipe(mixed $input = null, ...$args)
+{
     return new class($input, ...$args)
     {
         private $result;
@@ -37,7 +39,7 @@ function pipe(mixed $input = null, ...$args) {
         public function middleware(callable|array $middlewares): self
         {
             return $this;
-            
+
             if (! is_array($middlewares)) {
                 $middlewares = [$middlewares];
             }

@@ -1,6 +1,5 @@
 <?php
 
-use function Inmanturbo\Pipes\middleware;
 use function Inmanturbo\Pipes\pipe;
 
 class Subtract
