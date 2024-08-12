@@ -12,7 +12,7 @@ Simply put, it takes the output of the last one and pipes it to the next one. So
 You can install the package via composer:
 
 ```bash
-composer require inmanturbo/ecow
+composer require inmanturbo/pipes
 ```
 
 Or just copy or download the [`functions.php`](https://github.com/inmanturbo/pipes/blob/main/functions.php) file from this repository.
@@ -144,7 +144,7 @@ $five = (new Pipeline)->send(1)
 
 ```
 
-You can optionally pass a single `middleware` as a second argument to `hop()`, add it will get called before the first argument, which allows you to determine if the pipeline should halt before the `$callback` ever gets executed.
+You can optionally pass a single `middleware` as a second argument to `hop()`, and it will get called before the first argument, which allows you to determine if the pipeline should halt before the `$callback` ever gets executed.
 
 ```php
 

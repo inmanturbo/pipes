@@ -40,12 +40,12 @@ test('it can hop', function () {
 
     $seven = (new Pipeline)->send(1)
         ->through([
-            fn($passable, $next) => $next($addOne($passable)),
-            fn($passable, $next) => $next($addOne($passable)),
-            fn($passable, $next) => $next($addOne($passable)),
-            fn($passable, $next) => $next($addOne($passable)),
-            fn($passable, $next) => $next($addOne($passable)),
-            fn($passable, $next) => $next($addOne($passable)),
+            fn ($passable, $next) => $next($addOne($passable)),
+            fn ($passable, $next) => $next($addOne($passable)),
+            fn ($passable, $next) => $next($addOne($passable)),
+            fn ($passable, $next) => $next($addOne($passable)),
+            fn ($passable, $next) => $next($addOne($passable)),
+            fn ($passable, $next) => $next($addOne($passable)),
         ])
         ->thenReturn();
 
