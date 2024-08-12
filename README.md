@@ -144,7 +144,7 @@ $five = (new Pipeline)->send(1)
 
 ```
 
-You can optionally pass a single `middleware` as a second argument to `hop()`, add it will get called before the first argument, which allows you to determine if the pipeline should halt before the `$callback` ever gets executed.
+You can optionally pass a single `middleware` as a second argument to `hop()`, and it will get called before the first argument, which allows you to determine if the pipeline should halt before the `$callback` ever gets executed.
 
 ```php
 
