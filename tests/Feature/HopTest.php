@@ -21,12 +21,12 @@ class InvokeAdd
 
 test('it can hop', function () {
     $five = (new Pipeline)->send(0)
-        ->pipe(hop(fn($number) => $number +1))
-        ->pipe(hop(fn($number) => $number +1))
+        ->pipe(hop(fn ($number) => $number + 1))
+        ->pipe(hop(fn ($number) => $number + 1))
         ->pipe(hop(new InvokeAdd))
         ->pipe(hop(InvokeAdd::class))
-        ->pipe(hop(fn($number) => (new Add)->add($number)))
-    ->thenReturn();
+        ->pipe(hop(fn ($number) => (new Add)->add($number)))
+        ->thenReturn();
 
     $four = (new Pipeline)->send(1)
         ->through([

@@ -77,15 +77,16 @@ function pipe(mixed $input = null, ...$args)
     };
 }
 
-function hop(mixed $callback, mixed $middleware = null) {
+function hop(mixed $callback, mixed $middleware = null)
+{
     $callback = resolveCallback($callback);
 
     if ($middleware) {
         $middleware = resolveCallback($middleware);
     }
 
-    return function($passable, $next) use($callback, $middleware) {
-        if($middleware) {
+    return function ($passable, $next) use ($callback, $middleware) {
+        if ($middleware) {
             return $middleware($callback($passable), $next);
         }
 
