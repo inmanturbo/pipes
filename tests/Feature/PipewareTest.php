@@ -13,7 +13,7 @@ class Subtract
 
 it('can pipe', function () {
 
-    $add = fn ($number) => $number + 1;
+    $add = fn ($number = 0) => $number + 1;
 
     $five = pipe($add, 1)
         ->pipe(fn ($number) => $number + 1)
@@ -22,6 +22,14 @@ it('can pipe', function () {
         ->thenReturn();
 
     expect($five)->toBe(5);
+
+    $four = pipe($add)
+        ->pipe(fn ($number) => $number + 1)
+        ->pipe($add)
+        ->pipe($add)
+        ->thenReturn();
+
+    expect($four)->toBe(4);
 
     $six = pipe($add, 1)
         ->pipe($add)
