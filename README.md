@@ -112,7 +112,7 @@ $five = pipe($addOne, 1)
 
 ## hop() and Laravel
 
-This package doesn't require laravel to use pipe or `hop()`, but `hop()` (higher-order-pipe) is a higher order function intended for working with Laravel's [Pipeline](https://laravel.com/docs/11.x/helpers#pipeline) helper, which wraps a callback that takes a single argument inside one that can get passed through the pipeline by returning the standard `$next($passable)`.
+This package doesn't require laravel to use pipe or `hop()`, but `hop()` (higher-order-pipe) is a higher order function intended for working with Laravel's [Pipeline](https://laravel.com/docs/11.x/helpers#pipeline) helper. This higher-order-function takes a callback which takes a single argument, and wraps the `$callback` in a closure that implements `function($next, $passable)`.
 
 ```php
 
@@ -144,7 +144,7 @@ $five = (new Pipeline)->send(1)
 
 ```
 
-You can optionally pass a single `middleware` as a second argument to `hop()`, add it will get called before the first argument, which allows you to determine if the pipeline should halt before the `$callback` gets excecuted.
+You can optionally pass a single `middleware` as a second argument to `hop()`, add it will get called before the first argument, which allows you to determine if the pipeline should halt before the `$callback` ever gets executed.
 
 ```php
 
