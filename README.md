@@ -5,10 +5,20 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/inmanturbo/pipes/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/inmanturbo/pipes/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/inmanturbo/pipes.svg?style=flat-square)](https://packagist.org/packages/inmanturbo/pipes)
 
+Simply put, it takes the output of the last one and pipes it to the next one. Sorta like bash  `cat ./file | grep -e 'waldo'`
+
+## Installation
+
+You can install the package via composer:
+
+```bash
+composer require inmanturbo/ecow
+```
+
+Or just copy or download the ['functions.php'](https://github.com/inmanturbo/pipes/blob/main/functions.php) file from this repository.
 
 # Usage
 
-Very Simply put, it takes the output of the last one and pipes it to the next one in a chain. sorta like bash  `cat ./file | grep -e 'waldo'`
 
 ```php
 
