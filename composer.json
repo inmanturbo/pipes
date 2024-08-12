@@ -2,6 +2,9 @@
     "name": "inmanturbo/pipes",
     "description": "Pipes for php with a simple api based on functional composition",
     "type": "library",
+    "require": {
+        "php": "^8.2"
+    },
     "require-dev": {
         "pestphp/pest": "3.x-dev",
         "laravel/pint": "dev-main",
