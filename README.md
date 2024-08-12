@@ -15,7 +15,7 @@ You can install the package via composer:
 composer require inmanturbo/ecow
 ```
 
-Or just copy or download the ['functions.php'](https://github.com/inmanturbo/pipes/blob/main/functions.php) file from this repository.
+Or just copy or download the [`functions.php`](https://github.com/inmanturbo/pipes/blob/main/functions.php) file from this repository.
 
 # Usage
 
