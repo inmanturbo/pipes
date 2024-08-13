@@ -85,7 +85,6 @@ class Pipe
             $this->result = $this->resolveInput($callback)($this->result);
         }
 
-
         return $this;
     }
 
