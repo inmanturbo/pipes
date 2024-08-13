@@ -95,7 +95,6 @@ it('can halt and resume', function () {
     expect($fortyFive->then(fn ($number) => ++$number))->toBe(45);
     expect($fortyFive->pipe(fn ($number) => ++$number)->result())->toBe(45);
     expect($fortyFive->pipe(fn ($number) => ++$number)->halted())->toBe(true);
-    
-    
+
     expect($fortyFive->resume(fn ($number) => ++$number)->result())->toBe(46);
 });
