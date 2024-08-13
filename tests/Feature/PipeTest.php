@@ -1,5 +1,7 @@
 <?php
 
+use Inmanturbo\Pipes\Halt;
+
 use function Inmanturbo\Pipes\pipe;
 
 class Subtract
@@ -57,4 +59,20 @@ it('can pipe', function () {
     }
 
     expect($fifty->thenReturn())->toBe(50);
+});
+
+it('can halt', function () {
+    $fortyFive = pipe(1);
+
+    $count = 1;
+    while ($count < 50) {
+        $fortyFive->pipe(fn ($number) => $number < 45 ? ++$number : new Halt($number));
+
+        $count ++;
+    }
+
+    expect($fortyFive->result())->toBe(45);
+    expect($fortyFive->then(fn ($number) => ++$number))->toBe(45);
+    expect($fortyFive->pipe(fn ($number) => ++$number)->result())->toBe(45);
+    expect($fortyFive->pipe(fn ($number) => ++$number)->halted())->toBe(true);
 });

@@ -43,7 +43,7 @@ function resolveCallback(mixed $callback)
 
 class Halt
 {
-    public function __construct(public $result = null) {}
+    public function __construct(public mixed $result = null) {}
 }
 
 class Pipe
@@ -51,6 +51,11 @@ class Pipe
     private $result;
 
     private bool $halted = false;
+
+    public function halted()
+    {
+        return $this->halted;
+    }
 
     public function halt(mixed $result = null)
     {
@@ -68,18 +73,21 @@ class Pipe
 
     public function pipe(mixed $callback): self
     {
-        $callback = $this->resolveInput($callback);
+        if ($this->result instanceof Halt) {
+            $this->halted = true;
+        }
 
         if (! $this->halted) {
-            $this->result = $callback($this->result);
+            $this->result = $this->resolveInput($callback)($this->result);
         }
+
 
         return $this;
     }
 
     public function result(): mixed
     {
-        return $this->result;
+        return $this->halted ? $this->result->result : $this->result;
     }
 
     public function then(?callable $callback = null): mixed

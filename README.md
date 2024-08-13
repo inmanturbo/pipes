@@ -110,6 +110,31 @@ $five = pipe($addOne, 1)
     ->result();
 ```
 
+## Halting the pipeline
+
+You can return an instance of `Inmanturbo\Pipes\Halt` from a callback to halt the chain. `Halt` takes an optional result in its constructor which you can pass as the final `result()` of the chain. Subsequent calls to `->pipe()` will not affect the final outcome.
+
+```php
+
+    $fortyFive = pipe(1);
+
+    $count = 1;
+    while ($count < 50) {
+        $fortyFive->pipe(fn ($number) => $number < 45 ? ++$number : new Halt($number));
+
+        $count ++;
+    }
+
+    echo $fortyFive->result();
+
+    // 45
+
+    echo $fortyFive->pipe(fn ($number) => ++$number)->result();
+
+    // 45
+
+```
+
 ## hop() and Laravel
 
 This package doesn't require laravel to use pipe or `hop()`, but `hop()` (higher-order-pipe) is a higher order function intended for working with Laravel's [Pipeline](https://laravel.com/docs/11.x/helpers#pipeline) helper. This higher-order-function takes a callback which takes a single argument, and wraps the `$callback` for you in a closure which implements `function($next, $passable)`.
