@@ -169,6 +169,38 @@ You can also call halt on the pipe itself
 
 ```
 
+## resume()
+
+You can resume the pipe with resume. pipe()->resume() takes an optional callback and behaves the same as pipe()->pipe() if a callback is passed
+
+```php
+
+use function Inmanturbo\Pipes\{pipe, halt};
+
+$fortySix = pipe(1);
+
+$count = 1;
+while ($count < 50) {
+    
+    if (($number = $fortySix->result()) >= 45) {
+        $fortySix->halt($number);
+    }
+
+    $fortySix->pipe(fn ($number) => ++$number);
+
+    $count ++;
+}
+
+echo $fortySix->result();
+
+// 45
+
+echo $fortySix->resume(fn ($number) => ++$number)->result();
+
+// 46
+
+```
+
 ## hop() and Laravel
 
 This package doesn't require laravel to use pipe or `hop()`, but `hop()` (higher-order-pipe) is a higher order function intended for working with Laravel's [Pipeline](https://laravel.com/docs/11.x/helpers#pipeline) helper. This higher-order-function takes a callback which takes a single argument, and wraps the `$callback` for you in a closure which implements `function($next, $passable)`.
