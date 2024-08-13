@@ -79,7 +79,7 @@ class Pipe
     public function resume(mixed $callback = null)
     {
         $this->result = $this->result();
-        
+
         $this->halted = false;
 
         return $callback ? $this->pipe($callback) : $this;
