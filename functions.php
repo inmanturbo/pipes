@@ -48,7 +48,12 @@ function resolveCallback(mixed $callback)
 
 class Halt
 {
-    public function __construct(public mixed $result = null) {}
+    public function __construct(private mixed $result = null) {}
+
+    public function result(): mixed
+    {
+        return $this->result;
+    }
 }
 
 class Pipe
@@ -69,6 +74,15 @@ class Pipe
         $this->result = halt($result);
 
         return $this;
+    }
+
+    public function resume(mixed $callback = null)
+    {
+        $this->result = $this->result();
+        
+        $this->halted = false;
+
+        return $callback ? $this->pipe($callback) : $this;
     }
 
     public function __construct(mixed $input = null, ...$args)
@@ -93,7 +107,7 @@ class Pipe
 
     public function result(): mixed
     {
-        return $this->halted ? $this->result->result : $this->result;
+        return $this->halted ? $this->result->result() : $this->result;
     }
 
     public function then(?callable $callback = null): mixed
