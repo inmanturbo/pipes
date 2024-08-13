@@ -65,7 +65,9 @@ class Pipe
     {
         $this->halted = true;
 
-        return new Halt($result);
+        $this->result = halt($result);
+
+        return $this;
     }
 
     public function __construct(mixed $input = null, ...$args)
