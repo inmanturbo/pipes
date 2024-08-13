@@ -112,15 +112,19 @@ $five = pipe($addOne, 1)
 
 ## Halting the pipeline
 
-You can return an instance of `Inmanturbo\Pipes\Halt` from a callback to halt the chain. `Halt` takes an optional result in its constructor which you can pass as the final `result()` of the chain. Subsequent calls to `->pipe()` will not affect the final outcome.
+## halt()
+
+You can return `halt()` from a callback to halt the chain. `halt` takes an optional result as an argument which you can pass as the final `result()` of the chain. Subsequent calls to `->pipe()` will not affect the final result.
 
 ```php
+
+    use function Inmanturbo\Pipes\{pipe, halt};
 
     $fortyFive = pipe(1);
 
     $count = 1;
     while ($count < 50) {
-        $fortyFive->pipe(fn ($number) => $number < 45 ? ++$number : new Halt($number));
+        $fortyFive->pipe(fn ($number) => $number < 45 ? ++$number : halt($number));
 
         $count ++;
     }

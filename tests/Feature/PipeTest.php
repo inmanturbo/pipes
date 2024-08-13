@@ -1,7 +1,6 @@
 <?php
 
-use Inmanturbo\Pipes\Halt;
-
+use function Inmanturbo\Pipes\halt;
 use function Inmanturbo\Pipes\pipe;
 
 class Subtract
@@ -66,7 +65,7 @@ it('can halt', function () {
 
     $count = 1;
     while ($count < 50) {
-        $fortyFive->pipe(fn ($number) => $number < 45 ? ++$number : new Halt($number));
+        $fortyFive->pipe(fn ($number) => $number < 45 ? ++$number : halt($number));
 
         $count ++;
     }

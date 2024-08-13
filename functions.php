@@ -9,6 +9,10 @@ function pipe(mixed $input = null, ...$args)
     return new Pipe($input, ...$args);
 }
 
+function halt(mixed $result = null) {
+    return new Halt($result);
+}
+
 function hop(mixed $callback, mixed $middleware = null)
 {
     $callback = resolveCallback($callback);
