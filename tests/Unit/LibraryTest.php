@@ -46,18 +46,38 @@ class Library {
 
     public static function library(bool $addOne = false, bool $addTwo = false)
     {
-        // If no arguments are passed, return all options
-        if (empty(func_get_args())) {
+        return static::getLibrary($addOne, $addTwo);
+    }
+
+    public static function getLibrary(...$args)
+    {
+        $reflection = new \ReflectionMethod(__CLASS__, 'library');
+        $parameters = $reflection->getParameters();
+        $args = func_get_args();
+        $options = [];
+
+        foreach ($parameters as $index => $param) {
+            if (isset($args[$index])) {
+                $options[$param->getName()] = $args[$index];
+            } else {
+                $options[$param->getName()] = $param->isDefaultValueAvailable() ? $param->getDefaultValue() : null;
+            }
+        }
+
+        // Determine if all options are false
+        $allFalse = count(array_filter($options)) == 0;
+
+        // If all options are false or no arguments were passed, return all closures
+        if ($allFalse || count($args) === 0) {
             return array_values(self::closures());
         }
 
-        $options = compact('addOne', 'addTwo');
         $result = self::options($options);
 
         if (count($result) === 1) {
-            return reset($result);
+            return reset($result); // Return the single callable directly
         }
 
-        return array_values($result);
+        return array_values($result); // Return all matching closures
     }
 }
