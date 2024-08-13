@@ -81,14 +81,14 @@ it('can halt', function () {
 
     $count = 1;
     while ($count < 50) {
-        
+
         if (($number = $fortyFive->result()) >= 45) {
             $fortyFive->halt($number);
         }
 
         $fortyFive->pipe(fn ($number) => ++$number);
 
-        $count ++;
+        $count++;
     }
 
     expect($fortyFive->result())->toBe(45);
