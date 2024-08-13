@@ -9,7 +9,8 @@ function pipe(mixed $input = null, ...$args)
     return new Pipe($input, ...$args);
 }
 
-function halt(mixed $result = null) {
+function halt(mixed $result = null)
+{
     return new Halt($result);
 }
 
