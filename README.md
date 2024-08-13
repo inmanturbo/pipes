@@ -171,7 +171,7 @@ You can also call halt on the pipe itself
 
 ## resume()
 
-You can resume the pipes with resume. `pipe()->resume()` takes an optional callback and behaves the same as `pipe()->pipe()` if a callback is passed
+You can resume the piping with resume. `pipe()->resume()` takes an optional callback and behaves the same as `pipe()->pipe()` if a callback is passed
 
 ```php
 
