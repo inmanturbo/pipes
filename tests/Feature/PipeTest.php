@@ -60,7 +60,7 @@ it('can pipe', function () {
     expect($fifty->thenReturn())->toBe(50);
 });
 
-it('cant halt with halt', function () {
+it('can halt with halt', function () {
     $fortyFive = pipe(1);
 
     $count = 1;
