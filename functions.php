@@ -22,7 +22,7 @@ function hop(mixed $callback, mixed $middleware = null)
         $middleware = resolveCallback($middleware);
     }
 
-    return function ($passable, $next) use ($callback, $middleware) {
+    return function ($passable, $next) use (&$callback, &$middleware) {
         if ($middleware) {
             return $middleware($callback($passable), $next);
         }
